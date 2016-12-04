@@ -33,7 +33,6 @@ headers['content-type'] = 'application/json'
 
 i = 0
 while(limit == -1 or i < limit):
-    print 'Offset: ' + str(i)
     time.sleep(1)
     query['offset'] = i
     req = requests.get(url + '/v7.1/route/',
@@ -41,6 +40,7 @@ while(limit == -1 or i < limit):
                        headers=headers)
     reqJson = req.json()
     if i >= reqJson['total_count']: break
+    print 'Offset: ' + str(i) + ' Total: ' + str(reqJson['total_count'])
     for route in reqJson['_embedded']['routes']:
         i += 1
         routeUrl = route['_links']['alternate'][1]['href']
