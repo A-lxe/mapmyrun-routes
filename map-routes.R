@@ -24,7 +24,14 @@ routes <- data.frame(cbind(index, latitude, longitude))
 
 # Map the routes
 ids <- unique(index)
-plot(routes$longitude, routes$latitude, type="n", axes=TRUE, xlab="", ylab="", main="", asp=1)
+plot(routes$longitude, routes$latitude, type="n", axes=TRUE, xlab="", ylab="", main="", asp=1, ylim=c(42.330410,42.383941), xlim=c(-71.116591, -71.031704))
+for (i in 1:length(ids)) {
+	currRoute <- subset(routes, index==ids[i])
+	lines(currRoute$longitude, currRoute$latitude, col="#00000020")
+}
+# Map the routes
+ids <- unique(index)
+plot(routes$longitude, routes$latitude, type="n", axes=TRUE, xlab="", ylab="", main="", asp=1, xlim=c( ylim=c(40,50))
 for (i in 1:length(ids)) {
 	currRoute <- subset(routes, index==ids[i])
 	lines(currRoute$longitude, currRoute$latitude, col="#00000020")
