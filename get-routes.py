@@ -7,12 +7,12 @@ import requests
 
 def writeRouteFiles(jsonMeta, textGpx, dir='./out'):
     dir = dir + '/' + jsonMeta['_links']['self'][0]['id']
-    if not os.path.exists(dir): os.makedirs(dir)
-    pp = pprint.PrettyPrinter(indent=4)
-    jsonFile = open(dir + '/meta.json', 'w')
-    jsonFile.write(pp.pformat(jsonMeta))
-    jsonFile.close()
-    gpxFile = open(dir + '/route.gpx', 'w')
+    #if not os.path.exists(dir): os.makedirs(dir)
+    #pp = pprint.PrettyPrinter(indent=4)
+    #jsonFile = open(dir + '/meta.json', 'w')
+    #jsonFile.write(pp.pformat(jsonMeta))
+    #jsonFile.close()
+    gpxFile = open(dir+ '.gpx', 'w')
     gpxFile.write(textGpx)
     gpxFile.close()
 
@@ -39,6 +39,7 @@ while(limit == -1 or i < limit):
                        params=query,
                        headers=headers)
     reqJson = req.json()
+    print(req.reason)
     if i >= reqJson['total_count']: break
     print 'Offset: ' + str(i) + ' Total: ' + str(reqJson['total_count'])
     for route in reqJson['_embedded']['routes']:
