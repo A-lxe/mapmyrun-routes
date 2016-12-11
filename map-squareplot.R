@@ -7,7 +7,7 @@ library(maps)
 library(ggmap)
 
 ## Reading in the data
-chicagoMVT <- read.csv('route-frequencymap-medium.csv', stringsAsFactors = FALSE)
+chicagoMVT <- read.csv('pedestrian-frequencymap.csv', stringsAsFactors = FALSE)
 chicagoMVT$frequency <- log10(chicagoMVT$frequency)
 ## Get Chicago map
 chicago <- get_map(location = 'Boston', zoom=13)
@@ -21,6 +21,6 @@ locationCrimes$frequency <- as.numeric(as.character(chicagoMVT$frequency))
 
 ## Plotting the location heatmap
 #png(filename = "boston.png", width = 800, height = 600, units = "px")
-ggmap(chicago) + geom_tile(data = chicagoMVT, aes(x = longitude, y = latitude, alpha = frequency))
+map = ggmap(chicago) + geom_tile(data = chicagoMVT, aes(x = longitude, y = latitude, alpha = frequency), fill="red")
                            #fill = "red") + theme(axis.title.y = element_blank(), axis.title.x = element_blank())
 #dev.off()
